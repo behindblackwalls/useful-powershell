@@ -1,0 +1,1 @@
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Adobe\Adobe Acrobat\DC\FeatureLockDown\" -Name "bDisableJavascript" -Value 1
