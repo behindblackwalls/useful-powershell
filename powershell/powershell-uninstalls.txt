@@ -1,0 +1,89 @@
+Open terminal as admin. 
+ 
+Uninstalling Winget apps 
+ 
+List apps with command: 
+Winget list 
+Uninstall using the id 
+Winget uninstall 7zip.7zip  
+ 
+For user installations. 
+ 
+Winget uninstall –scope machine 
+ 
+For machine installations. 
+ 
+Uninstall using 'get-wmiobject' 
+ 
+List installed applications 
+Get-WmiObject -Class Win32_Product | Select-Object -Property Name, IdentifyingNumber 
+  
+Uninstall a specific application 
+$appName = "Your Application Name" 
+$app = Get-WmiObject -Class Win32_Product | Where-Object { $_.Name -eq $appName } 
+$app.Uninstall() 
+ 
+For multiple: 
+ 
+# List of application names to uninstall 
+$appNames = @("AppName1", "AppName2", "AppName3") 
+  
+foreach ($appName in $appNames) { 
+    $app = Get-WmiObject -Class Win32_Product | Where-Object { $_.Name -eq $appName } 
+    if ($app) { 
+        Write-Output "Uninstalling $appName..." 
+        $app.Uninstall() 
+        Write-Output "$appName uninstalled successfully." 
+    } else { 
+        Write-Output "$appName not found." 
+    } 
+} 
+ 
+ 
+Uninstall using 'Get-Package' 
+ 
+# List installed applications 
+Get-Package 
+  
+# Uninstall a specific application 
+$appName = "Your Application Name" 
+Get-Package -Name $appName | Uninstall-Package 
+ 
+For multiple: 
+ 
+# List of application names to uninstall 
+$appNames = @("AppName1", "AppName2", "AppName3") 
+  
+foreach ($appName in $appNames) { 
+    $app = Get-Package -Name $appName -ErrorAction SilentlyContinue 
+    if ($app) { 
+        Write-Output "Uninstalling $appName..." 
+        Uninstall-Package -Name $appName -Force 
+        Write-Output "$appName uninstalled successfully." 
+    } else { 
+        Write-Output "$appName not found." 
+    } 
+} 
+ 
+ 
+Uninstall using registry keys 
+# Define the registry paths 
+$registryPaths = @( 
+    "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*", 
+    "HKLM:\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*", 
+    "HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*" 
+) 
+  
+# Find the uninstall string for a specific application 
+$appName = "Your Application Name" 
+foreach ($path in $registryPaths) { 
+    $uninstallKey = Get-ItemProperty $path | Where-Object { $_.DisplayName -eq $appName } 
+    if ($uninstallKey) { 
+        Write-Output "Found uninstall key for $appName" 
+        Write-Output "UninstallString: $($uninstallKey.UninstallString)" 
+         
+        # Execute the uninstall command 
+        & $uninstallKey.UninstallString 
+        break 
+    } 
+} 
