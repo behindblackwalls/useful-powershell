@@ -1,0 +1,18 @@
+config.office.com
+https://aadinternals.com/
+https://d3fend.mitre.org/
+https://attack.mitre.org/
+https://github.com/counteractive/incident-response-plan-template
+https://github.com/gorhill/uBlock/wiki/Deploying-uBlock-Origin
+https://www.virustotal.com/gui/home/upload
+https://metadefender.opswat.com/
+https://app.any.run/#register
+https://www.sans.org/posters/
+https://abuse.ch/
+https://threatfox.abuse.ch/
+https://socradar.io/labs/ioc-radar/
+https://www.ipchicken.com/
+https://gchq.github.io/CyberChef/
+https://fauux.neocities.org/
+https://www.trendmicro.com/vinfo/us/threat-encyclopedia/
+javascript:(function(){var el = typeof viewer !== 'undefined' ? viewer : document.body; el.style.filter = 'grayscale(1) invert(1) sepia(1) contrast(75%)';})()
