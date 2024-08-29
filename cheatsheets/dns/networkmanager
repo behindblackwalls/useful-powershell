@@ -1,0 +1,6 @@
+
+sudo nano /etc/NetworkManager/NetworkManager.conf
+
+dns=none
+
+systemctl restart NetworkManager
